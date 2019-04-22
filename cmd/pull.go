@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"github.com/deislabs/oras/pkg/content"
 	"github.com/deislabs/oras/pkg/oras"
@@ -36,12 +35,8 @@ func newPullCmd() *cobra.Command {
 }
 
 func (p *pullCmd) run() error {
-	wd, err := os.Getwd()
-	if err != nil {
-		return fmt.Errorf("cannot get current working directory")
-	}
 
-	fs := content.NewFileStore(wd)
+	fs := content.NewFileStore(p.outputBundle)
 	defer fs.Close()
 
 	desc, layers, err := oras.Pull(context.Background(), newResolver(), p.targetRef, fs, oras.WithAllowedMediaTypes([]string{CNABMediaType}))
