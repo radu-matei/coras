@@ -12,7 +12,7 @@ $ make bootstrap
 $ make build
 ```
 
-This will compiled the binary in `bin/`.
+This will compile the binary in `bin/`.
 
 ```
 $ ./bin/coras push testdata/test.json --target cnabregistry.azurecr.io/coras:latest

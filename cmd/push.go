@@ -20,7 +20,7 @@ type pushCmd struct {
 	targetRef   string
 }
 
-// CNABMediaType represents an *temporary* media type for thin CNAB bundles
+// CNABMediaType represents a *temporary* media type for thin CNAB bundles
 // it is not final, and currently acts as a placeholder
 const CNABMediaType = "application/vnd.cnab.bundle.thin.v1-wd+json"
 
