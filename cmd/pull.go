@@ -1,17 +1,14 @@
 package main
 
 import (
-	"context"
-	"fmt"
-
-	"github.com/deislabs/oras/pkg/content"
-	"github.com/deislabs/oras/pkg/oras"
+	"github.com/radu-matei/coras/pkg/coras"
 	"github.com/spf13/cobra"
 )
 
 type pullCmd struct {
 	outputBundle string
 	targetRef    string
+	exported     bool
 }
 
 func newPullCmd() *cobra.Command {
@@ -25,26 +22,15 @@ func newPullCmd() *cobra.Command {
 		Long:  usage,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			p.outputBundle = args[0]
+			p.targetRef = args[1]
 			return p.run()
 		},
 	}
 
-	cmd.Flags().StringVarP(&p.targetRef, "target", "t", "", "reference where the bundle will be pushed")
-
+	cmd.Flags().BoolVarP(&p.exported, "exported", "", false, "When passed, this command will pull an exported (thick) bundle")
 	return cmd
 }
 
 func (p *pullCmd) run() error {
-
-	fs := content.NewFileStore(p.outputBundle)
-	defer fs.Close()
-
-	desc, layers, err := oras.Pull(context.Background(), newResolver(), p.targetRef, fs, oras.WithAllowedMediaTypes([]string{CNABMediaType}))
-	if err != nil {
-		return fmt.Errorf("cannot pull bundle: %v", err)
-	}
-
-	fmt.Printf("descriptor: %v\n\n layers: %v", desc, layers)
-
-	return nil
+	return coras.Pull(p.targetRef, p.outputBundle, p.exported)
 }

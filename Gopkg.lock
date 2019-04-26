@@ -55,6 +55,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:8cd271f26db91626bd5993ed540069dbade9f6149134e7f8a0ed951cbbf4f2ec"
+  name = "github.com/deislabs/cnab-go"
+  packages = ["bundle"]
+  pruneopts = "UT"
+  revision = "7cd944a8ee450ee465795d21ad7302bed34ad1b0"
+
+[[projects]]
+  branch = "master"
   digest = "1:82158435e282da9b23bb1188487fe1c68b17a54ed9dcd557ab6204782ad3ff92"
   name = "github.com/deislabs/oras"
   packages = [
@@ -145,6 +153,14 @@
   version = "v0.6.1"
 
 [[projects]]
+  digest = "1:44fd27d0559326eb63ee0b7b5c80832c821761ff6d1b9cc4ad075783485a5837"
+  name = "github.com/docker/go"
+  packages = ["canonical/json"]
+  pruneopts = "UT"
+  revision = "62e5ec7cf43f795986ec658df7cb317255772993"
+  version = "v1.5.1-1"
+
+[[projects]]
   digest = "1:811c86996b1ca46729bad2724d4499014c4b9effd05ef8c71b852aad90deb0ce"
   name = "github.com/docker/go-connections"
   packages = [
@@ -193,6 +209,26 @@
   pruneopts = "UT"
   revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
   version = "v1.3.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:ff55753953bed2b3fd063aa7cd442de2a855c257d33ba0bf63f69178b5b5758e"
+  name = "github.com/google/go-containerregistry"
+  packages = [
+    "pkg/authn",
+    "pkg/name",
+    "pkg/v1",
+    "pkg/v1/empty",
+    "pkg/v1/layout",
+    "pkg/v1/partial",
+    "pkg/v1/random",
+    "pkg/v1/remote",
+    "pkg/v1/remote/transport",
+    "pkg/v1/types",
+    "pkg/v1/v1util",
+  ]
+  pruneopts = "UT"
+  revision = "7d6d1d3cd63b486f713ddf83be5956744f4e1bb3"
 
 [[projects]]
   digest = "1:d5f97fc268267ec1b61c3453058c738246fc3e746f14b1ae25161513b7367b0c"
@@ -260,6 +296,17 @@
   pruneopts = "UT"
   revision = "baf6536d6259209c3edfa2b22237af82942d3dfa"
   version = "v0.1.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:56529dba6b3a7f007ba2b96aa27d68eb965c980898e032fa271add2de682109b"
+  name = "github.com/pivotal/image-relocation"
+  packages = [
+    "pkg/image",
+    "pkg/registry",
+  ]
+  pruneopts = "UT"
+  revision = "532dd0b42e7a50010d7868364309cd314a2bb376"
 
 [[projects]]
   digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
@@ -389,10 +436,18 @@
   input-imports = [
     "github.com/containerd/containerd/remotes",
     "github.com/containerd/containerd/remotes/docker",
+    "github.com/deislabs/cnab-go/bundle",
     "github.com/deislabs/oras/pkg/auth/docker",
     "github.com/deislabs/oras/pkg/content",
     "github.com/deislabs/oras/pkg/oras",
+    "github.com/google/go-containerregistry/pkg/authn",
+    "github.com/google/go-containerregistry/pkg/name",
+    "github.com/google/go-containerregistry/pkg/v1",
+    "github.com/google/go-containerregistry/pkg/v1/remote",
+    "github.com/opencontainers/go-digest",
     "github.com/opencontainers/image-spec/specs-go/v1",
+    "github.com/pivotal/image-relocation/pkg/image",
+    "github.com/pivotal/image-relocation/pkg/registry",
     "github.com/spf13/cobra",
   ]
   solver-name = "gps-cdcl"

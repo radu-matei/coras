@@ -18,15 +18,12 @@
     "images": {
         "my-microservice": {
             "description": "my microservice",
-            "digest": "sha256:aaaaaaaaaaaa...",
-            "image": "technosophos/microservice:1.2.3"
+            "image": "ubuntu:latest"
         }
     },
     "invocationImages": [
         {
-            "digest": "sha256:aaaaaaa...",
-            "image": "technosophos/helloworld:0.1.0",
-            "imageType": "docker"
+            "image": "alpine:latest"
         }
     ],
     "maintainers": [
