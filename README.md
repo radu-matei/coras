@@ -50,7 +50,7 @@ radu:coras$ cat thisisathinbundle.json
 
 - how does this look in the registry? 
 
-There is one tag created for the bundle (in this example, `:latest`, and one tag for each image referenced in the bundle - although those images should be refernced by their SHA)
+There is one tag created for the bundle (in this example, `:v1`, and one tag for each image referenced in the bundle - although those images should be refernced by their SHA)
 
 ![](docs/img/repo.PNG "")
 
