@@ -62,8 +62,8 @@
   revision = "7cd944a8ee450ee465795d21ad7302bed34ad1b0"
 
 [[projects]]
-  branch = "push-oci-index"
-  digest = "1:5faf5523199a38c5fb4a894652005da17ac85324ea8cb5d8151dde54686fc39e"
+  branch = "master"
+  digest = "1:82158435e282da9b23bb1188487fe1c68b17a54ed9dcd557ab6204782ad3ff92"
   name = "github.com/deislabs/oras"
   packages = [
     "pkg/auth",
@@ -72,8 +72,7 @@
     "pkg/oras",
   ]
   pruneopts = "UT"
-  revision = "62e165678feaf2360342c46b86c009b136b3c339"
-  source = "github.com/radu-matei/oras"
+  revision = "9f7669048990b0d0c186985737e6a6c3bb3f7ecc"
 
 [[projects]]
   digest = "1:f65090e4f60dcd4d2de69e8ebca022d59a8c6463a3a4c122e64cec91a83749ff"
@@ -441,6 +440,11 @@
     "github.com/deislabs/oras/pkg/auth/docker",
     "github.com/deislabs/oras/pkg/content",
     "github.com/deislabs/oras/pkg/oras",
+    "github.com/google/go-containerregistry/pkg/authn",
+    "github.com/google/go-containerregistry/pkg/name",
+    "github.com/google/go-containerregistry/pkg/v1",
+    "github.com/google/go-containerregistry/pkg/v1/remote",
+    "github.com/opencontainers/go-digest",
     "github.com/opencontainers/image-spec/specs-go/v1",
     "github.com/pivotal/image-relocation/pkg/image",
     "github.com/pivotal/image-relocation/pkg/registry",
