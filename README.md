@@ -45,32 +45,6 @@ radu:coras$ cat thisisathinbundle.json
 {"name":"helloworld-testdata","version":"0.1.2","description":"An example 'thin' helloworld Cloud-Native Application Bundle","maintainers":[{"name":"Matt Butcher","email":"matt.butcher@microsoft.com","url":"https://example.com"}],"invocationImages":[{"imageType":"","image":"cnabregistry.azurecr.io/cnab-thin-bundle:alpine-latest","originalImage":"alpine:latest","digest":"sha256:5c40b3c27b9f13c873fefb2139765c56ce97fd50230f1f2d5c91e55dec171907"}],"images":{"my-microservice":{"imageType":"","image":"cnabregistry.azurecr.io/cnab-thin-bundle:ubuntu-latest","originalImage":"ubuntu:latest","digest":"sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab","description":"my microservice"}},"parameters":{"backend_port":{"type":"integer","destination":{"env":"BACKEND_PORT"}}},"credentials":{"hostkey":{"path":"/etc/hostkey.txt","env":"HOST_KEY"}}}
 ```
 
-
-## FAQ for thin bundles
-
-- how does this look in the registry? 
-
-There is one tag created for the bundle (in this example, `:v1`, and one tag for each image referenced in the bundle - although those images should be refernced by their SHA)
-
-![](docs/img/repo.PNG "")
-
-- can I directly `docker pull` referenced images?
-
-Yes (notice that the here, we are using the repository where we pushed the bundle, but we are passing the SHA of the `ubuntu` image -- see the pulled bundle for details):
-
-```
-radu:coras$ docker pull cnabregistry.azurecr.io/cnab-thin-bundle@sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab
-sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab: Pulling from cnab-thin-bundle
-Digest: sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab
-Status: Downloaded newer image for cnabregistry.azurecr.io/cnab-thin-bundle@sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab
-```
-
-Notes on thin bundles, relocating images, and media types used:
-
-- currently, the library doesn't handle images referenced by their SHA in the input bundle -- but since it uses [`pivotal/image-relocation`](https://github.com/pivotal/image-relocation) for relocating images (which supports all ways of referencing images), so will this library.
-- the media type of the manifest pushed to the reigstry -- by default, `oras` pushes files using `"mediaType": "application/vnd.oci.image.config.v1+json"`, which is an OCI image configuration. We are currently testing how use an [OCI image index](https://github.com/opencontainers/image-spec/blob/master/image-index.md) (similar to how [`cnab-to-oci`](https://github.com/docker/cnab-to-oci) uses a Docker manifest list to reference images used in the bundle). See [this issue for more context](https://github.com/radu-matei/coras/issues/8), and [this fork of `oras`](https://github.com/radu-matei/oras/tree/push-oci-index) for an example of how to do this.
-
-
 ## How does this work for thick bundles?
 
 - using an exported (thick) bundle, it will be pushed to the registry as a single layer, the `.tgz` file itself:
@@ -101,4 +75,39 @@ drwxrwxrwx 1 radu radu 4096 Apr 26 07:13 ..
 drwxrwxrwx 1 radu radu 4096 Apr 26 07:11 artifacts
 -rwxrwxrwx 1 radu radu 1338 Apr 26 07:10 bundle.json
 ```
+
+
+## FAQ 
+
+- how does a thin bundle look in the registry? 
+
+There is one tag created for the bundle (in this example, `:v1`, and one tag for each image referenced in the bundle - although those images should be refernced by their SHA)
+
+![](docs/img/repo.PNG "")
+
+- can I directly `docker pull` referenced images?
+
+Yes (notice that the here, we are using the repository where we pushed the bundle, but we are passing the SHA of the `ubuntu` image -- see the pulled bundle for details):
+
+```
+radu:coras$ docker pull cnabregistry.azurecr.io/cnab-thin-bundle@sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab
+sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab: Pulling from cnab-thin-bundle
+Digest: sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab
+Status: Downloaded newer image for cnabregistry.azurecr.io/cnab-thin-bundle@sha256:f2557f94cac1cc4509d0483cb6e302da841ecd6f82eb2e91dc7ba6cfd0c580ab
+```
+
+- comparison to `docker/cnab-to-oci`:
+
+`cnab-to-oci` pushes all referenced images in the same repository, and stores the bundle information as annotations to the manifest list. This means that, in its current form, thick bundles (or any other arbitrary file, for that matter) cannot be represented through `cnab-to-oci`.
+[This PR](https://github.com/deislabs/duffle/pull/681) adds registry support to Duffle through `cnab-to-oci`.
+
+- comparison to `pivotal/image-relocation`:
+
+`image-relocation` deals with pushing all images referenced by a bundle in the same container registry. Bundles (thin or thick) are not represented at all, and this project relies on `image-relocation` to push all images referenced by the bundle, but under the same repository -- meaning that all images referenced in the bundle are referenceable through the repository of the bundle, together with their SHA.
+
+- comparison to `deislabs/oras`:
+
+`deislabs/oras` deals with pushing arbitrary media types to OCI registries. It has no representation for CNAB bundles, and this project relies on `deislabs/oras` to push the actual bundle file / exported bundle. By default, `oras` pushes files using `"mediaType": "application/vnd.oci.image.config.v1+json"`, which is an OCI image configuration. We are currently testing how use an [OCI image index](https://github.com/opencontainers/image-spec/blob/master/image-index.md) (similar to how [`cnab-to-oci`](https://github.com/docker/cnab-to-oci) uses a Docker manifest list to reference images used in the bundle). See [this issue for more context](https://github.com/radu-matei/coras/issues/8), and [this fork of `oras`](https://github.com/radu-matei/oras/tree/push-oci-index) for an example of how to do this.
+
+
 
