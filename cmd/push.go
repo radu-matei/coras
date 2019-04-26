@@ -1,19 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
-
 	"github.com/radu-matei/coras/pkg/coras"
 
-	"github.com/deislabs/cnab-go/bundle"
 	"github.com/spf13/cobra"
 )
 
 type pushCmd struct {
-	inputBundle string
-	targetRef   string
-	exported    bool
+	inputFile string
+	targetRef string
+	exported  bool
 }
 
 // CNABMediaType represents a *temporary* media type for thin CNAB bundles
@@ -29,7 +25,7 @@ func newPushCmd() *cobra.Command {
 		Short: usage,
 		Long:  usage,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			p.inputBundle = args[0]
+			p.inputFile = args[0]
 			p.targetRef = args[1]
 			return p.run()
 		},
@@ -40,18 +36,5 @@ func newPushCmd() *cobra.Command {
 }
 
 func (p *pushCmd) run() error {
-	if p.exported {
-		return coras.PushThick(p.inputBundle, p.targetRef)
-	}
-
-	data, err := ioutil.ReadFile(p.inputBundle)
-	if err != nil {
-		return fmt.Errorf("cannot read input bundle: %v", err)
-	}
-	b, err := bundle.Unmarshal(data)
-	if err != nil {
-		return fmt.Errorf("cannot unmarshal input bundle: %v", err)
-	}
-
-	return coras.PushThin(b, p.targetRef)
+	return coras.Push(p.inputFile, p.targetRef, p.exported)
 }
