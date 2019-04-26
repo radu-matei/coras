@@ -32,12 +32,30 @@ const CNABThinBundleFileName = "bundle.json"
 // CNABThickBundleFileName represents the name of a thick bundle as stored in the registry
 const CNABThickBundleFileName = "bundle.tgz"
 
-// PushThin pushes a thin bundle and relocates all images to a new repository
+// Push pushes a bundle to an OCI registry
+func Push(inputFile, targetRef string, exported bool) error {
+	if exported {
+		return pushThick(inputFile, targetRef)
+	}
+
+	data, err := ioutil.ReadFile(inputFile)
+	if err != nil {
+		return fmt.Errorf("cannot read input bundle: %v", err)
+	}
+	b, err := bundle.Unmarshal(data)
+	if err != nil {
+		return fmt.Errorf("cannot unmarshal input bundle: %v", err)
+	}
+
+	return pushThin(b, targetRef)
+}
+
+// pushThin pushes a thin bundle and relocates all images to a new repository
 // TODO - @radu-matei
 // decide advantages / disadvantages of pushing an OCI index vs. an OCI image
 //
 // currently, this uses upstream oras and pushes a simple image with one layer, the bundle
-func PushThin(b *bundle.Bundle, targetRef string) error {
+func pushThin(b *bundle.Bundle, targetRef string) error {
 
 	err := RelocateBundleImages(b, targetRef)
 	if err != nil {
@@ -58,9 +76,9 @@ func PushThin(b *bundle.Bundle, targetRef string) error {
 	return err
 }
 
-// PushThick pushes a thick bundle to an OCI registry
+// pushThick pushes a thick bundle to an OCI registry
 // the resulting image will have a single layer, the bundle archive .tgz file
-func PushThick(archiveFile string, targetRef string) error {
+func pushThick(archiveFile string, targetRef string) error {
 
 	data, err := ioutil.ReadFile(archiveFile)
 	if err != nil {

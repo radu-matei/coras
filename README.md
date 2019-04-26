@@ -15,7 +15,7 @@ $ make build
 ## How does this work for thin bundles?
 
 - it copies all container images referenced in the bundle into the new repository, using the [`pivotal/image-relocation`](https://github.com/pivotal/image-relocation) library --  with one difference -- **it pushes all container images under the same repository**. (There is also a human-readable tag created, under the `<original-image-name>-<new-tag>` format, but this is not intended to be further used).
-- it updates the bundle with the new image location, populating the `originalImage` and digest fields appropriately. (Currently, this library relies in `pivotal/image-relocation` entirely for the new digest, and doesn't really check that the digest hasn't changed. We **must** check the digest in the future).
+- it updates the bundle with the new image location, populating the `originalImage` and digest fields appropriately. (Currently, this library relies on `pivotal/image-relocation` entirely for the new digest, and doesn't really check that the digest hasn't changed. We **must** check the digest in the future).
 - it pushes the newly updated bundle **to the same repository**, using [`deislabs/oras`](https://github.com/deislabs/oras).
 
 Example:
