@@ -23,7 +23,6 @@ func RelocateBundleImages(b *bundle.Bundle, targetRef string) error {
 		if err != nil {
 			return err
 		}
-
 		b.InvocationImages[i] = ii
 	}
 
@@ -59,7 +58,6 @@ func relocateImage(i *bundle.BaseImage, targetRef string, client registry.Client
 	//
 	// TODO - @radu-matei
 	// make sure naming strategy is consistent
-	// 	nn, err := image.NewName(fmt.Sprintf("%s:%s", strings.Split(r.targetRef, ":")[0], strings.Replace(i.Image, ":", "-", -1)))
 	newImage, err := image.NewName(fmt.Sprintf("%s:%s", strings.Split(targetRef, ":")[0], strings.Replace(i.Image, ":", "-", -1)))
 	if err != nil {
 		return false, fmt.Errorf("cannot get fully qualified image name for the new image in %v: %v", targetRef, err)

@@ -12,10 +12,6 @@ type pushCmd struct {
 	exported  bool
 }
 
-// CNABMediaType represents a *temporary* media type for thin CNAB bundles
-// it is not final, and currently acts as a placeholder
-const CNABMediaType = "application/vnd.cnab.bundle.thin.v1-wd+json"
-
 func newPushCmd() *cobra.Command {
 	const usage = `pushes a CNAB bundle to a registry using ORAS`
 	var p pushCmd
@@ -30,8 +26,8 @@ func newPushCmd() *cobra.Command {
 			return p.run()
 		},
 	}
-
 	cmd.Flags().BoolVarP(&p.exported, "exported", "", false, "When passed, this command will push an exported (thick) bundle")
+
 	return cmd
 }
 

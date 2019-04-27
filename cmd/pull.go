@@ -13,7 +13,6 @@ type pullCmd struct {
 
 func newPullCmd() *cobra.Command {
 	const usage = "pulls a CNAB bundle from a registry using ORAS"
-
 	var p pullCmd
 
 	cmd := &cobra.Command{
@@ -26,8 +25,8 @@ func newPullCmd() *cobra.Command {
 			return p.run()
 		},
 	}
-
 	cmd.Flags().BoolVarP(&p.exported, "exported", "", false, "When passed, this command will pull an exported (thick) bundle")
+
 	return cmd
 }
 
