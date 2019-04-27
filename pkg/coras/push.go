@@ -17,14 +17,13 @@ import (
 )
 
 // CNABThinMediaType represents a *temporary* media type for thin CNAB bundles
-// it is not final, and currently acts as a placeholder
 //
 // TODO - @radu-matei
 // discuss media types for CNAB
 const CNABThinMediaType = "application/vnd.cnab.bundle.thin.v1-wd+json"
 
 // CNABThickMediaType represents a thick bundle
-const CNABThickMediaType = "application/vnd.cnab.bundle.thick.v1-wd+json"
+const CNABThickMediaType = "application/vnd.cnab.bundle.thick.v1-wd+tgz"
 
 // CNABThinBundleFileName represents the name of a thin bundle as stored in the registry
 const CNABThinBundleFileName = "bundle.json"
@@ -42,6 +41,7 @@ func Push(inputFile, targetRef string, exported bool) error {
 	if err != nil {
 		return fmt.Errorf("cannot read input bundle: %v", err)
 	}
+
 	b, err := bundle.Unmarshal(data)
 	if err != nil {
 		return fmt.Errorf("cannot unmarshal input bundle: %v", err)
@@ -51,12 +51,7 @@ func Push(inputFile, targetRef string, exported bool) error {
 }
 
 // pushThin pushes a thin bundle and relocates all images to a new repository
-// TODO - @radu-matei
-// decide advantages / disadvantages of pushing an OCI index vs. an OCI image
-//
-// currently, this uses upstream oras and pushes a simple image with one layer, the bundle
 func pushThin(b *bundle.Bundle, targetRef string) error {
-
 	err := RelocateBundleImages(b, targetRef)
 	if err != nil {
 		return err
@@ -68,18 +63,17 @@ func pushThin(b *bundle.Bundle, targetRef string) error {
 	}
 
 	ms := content.NewMemoryStore()
-	// TODO - @radu-matei
-	// configurable name for bundle?
 	desc := ms.Add(CNABThinBundleFileName, CNABThinMediaType, data)
 	pushContents := []ocispec.Descriptor{desc}
 	_, err = oras.Push(context.Background(), newResolver(), targetRef, ms, pushContents)
+
 	return err
 }
 
-// pushThick pushes a thick bundle to an OCI registry
-// the resulting image will have a single layer, the bundle archive .tgz file
+// pushThick pushes a thick bundle to an OCI registry.
+//
+// The resulting image will have a single layer, the bundle archive .tgz file
 func pushThick(archiveFile string, targetRef string) error {
-
 	data, err := ioutil.ReadFile(archiveFile)
 	if err != nil {
 		return fmt.Errorf("cannot read exported bundle: %v", err)
@@ -98,10 +92,12 @@ func newResolver() remotes.Resolver {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: Error loading auth file: %v\n", err)
 	}
+
 	resolver, err := cli.Resolver(context.Background())
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: Error loading resolver: %v\n", err)
 		resolver = docker.NewResolver(docker.ResolverOptions{})
 	}
+
 	return resolver
 }
