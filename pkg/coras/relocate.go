@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/deislabs/cnab-go/bundle"
+	"github.com/docker/distribution/reference"
 	"github.com/pivotal/image-relocation/pkg/image"
 	"github.com/pivotal/image-relocation/pkg/registry"
 )
@@ -58,7 +59,13 @@ func relocateImage(i *bundle.BaseImage, targetRef string, client registry.Client
 	//
 	// TODO - @radu-matei
 	// make sure naming strategy is consistent
-	newImage, err := image.NewName(fmt.Sprintf("%s:%s", strings.Split(targetRef, ":")[0], strings.Replace(i.Image, ":", "-", -1)))
+
+	nn, err := TransformImageName(i.Image, targetRef)
+	if err != nil {
+		return false, fmt.Errorf("cannot parse new image name: %v", err)
+	}
+
+	newImage, err := image.NewName(nn)
 	if err != nil {
 		return false, fmt.Errorf("cannot get fully qualified image name for the new image in %v: %v", targetRef, err)
 	}
@@ -75,6 +82,26 @@ func relocateImage(i *bundle.BaseImage, targetRef string, client registry.Client
 	i.Image = newImage.String()
 
 	return false, nil
+}
+
+func TransformImageName(inputImage, targetRef string) (string, error) {
+	tref, err := reference.ParseNormalizedNamed(targetRef)
+	if err != nil {
+		return "", fmt.Errorf("cannot parse target reference: %v", err)
+	}
+
+	repo := strings.Split(tref.String(), ":")[0]
+
+	ref, err := reference.ParseNormalizedNamed(inputImage)
+	if err != nil {
+		return "", fmt.Errorf("cannot parse image reference: %v", err)
+	}
+	return fmt.Sprintf("%v:%v", repo, removeSlashColumnAt(ref.String())), nil
+
+}
+
+func removeSlashColumnAt(input string) string {
+	return strings.Replace(strings.Replace(strings.Replace(input, "/", "-", -1), ":", "-", -1), "@", "-", -1)
 }
 
 func isAcceptedImageType(imageType string) bool {
