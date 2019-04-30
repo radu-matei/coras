@@ -90,7 +90,11 @@ func TransformImageName(inputImage, targetRef string) (string, error) {
 		return "", fmt.Errorf("cannot parse target reference: %v", err)
 	}
 
-	repo := strings.Split(tref.String(), ":")[0]
+	nt, ok := tref.(reference.NamedTagged)
+	if !ok {
+		return "", fmt.Errorf("cannot use target reference that doesn't contain a tag")
+	}
+	repo := strings.Split(nt.Name(), fmt.Sprintf(":%s", nt.Tag()))[0]
 
 	ref, err := reference.ParseNormalizedNamed(inputImage)
 	if err != nil {
