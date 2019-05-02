@@ -51,7 +51,7 @@
   name = "github.com/containerd/continuity"
   packages = ["pathdriver"]
   pruneopts = "UT"
-  revision = "004b46473808b3e7a4a3049c20e4376c91eb966d"
+  revision = "aaeac12a7ffcd198ae25440a9dff125c2e2703a7"
 
 [[projects]]
   branch = "master"
@@ -63,7 +63,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:82158435e282da9b23bb1188487fe1c68b17a54ed9dcd557ab6204782ad3ff92"
+  digest = "1:0ea38111bffc13727365ff76b78ce29aafb2c1ee90e0902836fa8a4d8f577560"
   name = "github.com/deislabs/oras"
   packages = [
     "pkg/auth",
@@ -72,7 +72,7 @@
     "pkg/oras",
   ]
   pruneopts = "UT"
-  revision = "9f7669048990b0d0c186985737e6a6c3bb3f7ecc"
+  revision = "39de0678ff2995b33cb8c7ba7430042a836737bb"
 
 [[projects]]
   digest = "1:f65090e4f60dcd4d2de69e8ebca022d59a8c6463a3a4c122e64cec91a83749ff"
@@ -84,8 +84,8 @@
     "opts",
   ]
   pruneopts = "UT"
-  revision = "57b27434ea291cc3b86576830c26a892d2ede3af"
-  version = "v18.09.4"
+  revision = "c89750f836c57ce10386e71669e1b08a54c3caeb"
+  version = "v18.09.5"
 
 [[projects]]
   digest = "1:c22e25eae6d474723f1e6ed273ad5532429165f933165c77fe687f8d11087137"
@@ -142,15 +142,15 @@
   revision = "8a43b7bb99cd1eedc3aca61fbc3ccfba6b75c209"
 
 [[projects]]
-  digest = "1:8866486038791fe65ea1abf660041423954b1f3fb99ea6a0ad8424422e943458"
+  digest = "1:3d35be2858b1ef8365c4ca66af373602137159cf708e51f91db89c04347501f2"
   name = "github.com/docker/docker-credential-helpers"
   packages = [
     "client",
     "credentials",
   ]
   pruneopts = "UT"
-  revision = "5241b46610f2491efdf9d1c85f1ddf5b02f6d962"
-  version = "v0.6.1"
+  revision = "8a9f93a99ff87f416cc79f267c68151af0026f60"
+  version = "v0.6.2"
 
 [[projects]]
   digest = "1:44fd27d0559326eb63ee0b7b5c80832c821761ff6d1b9cc4ad075783485a5837"
@@ -181,12 +181,12 @@
   revision = "b84716841b82eab644a0c64fc8b42d480e49add5"
 
 [[projects]]
-  digest = "1:6f82cacd0af5921e99bf3f46748705239b36489464f4529a1589bc895764fb18"
+  digest = "1:e95ef557dc3120984bb66b385ae01b4bb8ff56bcde28e7b0d1beed0cccc4d69f"
   name = "github.com/docker/go-units"
   packages = ["."]
   pruneopts = "UT"
-  revision = "47565b4f722fb6ceae66b95f853feed578a4a51c"
-  version = "v0.3.3"
+  revision = "519db1ee28dcc9fd2474ae59fca29a810482bfb1"
+  version = "v0.4.0"
 
 [[projects]]
   digest = "1:48092bf6632f55839850666c33469f546f6d45fdbd59a66759ec12e84d853dc2"
@@ -212,7 +212,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ff55753953bed2b3fd063aa7cd442de2a855c257d33ba0bf63f69178b5b5758e"
+  digest = "1:86a6deb2714dd192699af9536e8bc807fa0b592fedce32c88fa64129264fb3a1"
   name = "github.com/google/go-containerregistry"
   packages = [
     "pkg/authn",
@@ -228,7 +228,7 @@
     "pkg/v1/v1util",
   ]
   pruneopts = "UT"
-  revision = "7d6d1d3cd63b486f713ddf83be5956744f4e1bb3"
+  revision = "b6d875c30fe7d51e952909e585882149f6fedf74"
 
 [[projects]]
   digest = "1:d5f97fc268267ec1b61c3453058c738246fc3e746f14b1ae25161513b7367b0c"
@@ -299,14 +299,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:56529dba6b3a7f007ba2b96aa27d68eb965c980898e032fa271add2de682109b"
+  digest = "1:ba45b4a0014c2d1e8d25118a3798bd67f0ab6d58db6ca0a22e55b3c9c5075abe"
   name = "github.com/pivotal/image-relocation"
   packages = [
     "pkg/image",
     "pkg/registry",
   ]
   pruneopts = "UT"
-  revision = "532dd0b42e7a50010d7868364309cd314a2bb376"
+  revision = "602e781a6af21fc57df3a3cea0576397b39bd49b"
 
 [[projects]]
   digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
@@ -350,11 +350,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:49b09905e781d7775c086604cc00083e1832d0783f1f421b79f42657c457d029"
+  digest = "1:2ea45e71e0198d6b989ed6302cc4f72a83be1e7d6469d08a59e56a2c447aea55"
   name = "github.com/prometheus/procfs"
   packages = ["."]
   pruneopts = "UT"
-  revision = "8368d24ba045f26503eb745b624d930cbe214c79"
+  revision = "87a4384529e0652f5035fb5cc8095faf73ea9b0b"
 
 [[projects]]
   digest = "1:fd61cf4ae1953d55df708acb6b91492d538f49c305b364a014049914495db426"
@@ -390,7 +390,7 @@
     "proxy",
   ]
   pruneopts = "UT"
-  revision = "afa5a82059c6356159f699d81beff22a81842231"
+  revision = "9ce7a6920f093fc0b908c4a5f66ae049110f417e"
 
 [[projects]]
   branch = "master"
@@ -398,18 +398,18 @@
   name = "golang.org/x/sync"
   packages = ["errgroup"]
   pruneopts = "UT"
-  revision = "56d357773e8497dfd526f0727e187720d1093757"
+  revision = "112230192c580c3556b8cee6403af37a4fc5f28c"
 
 [[projects]]
   branch = "master"
-  digest = "1:a29b488ff122fd8033d43c7cfcc5a0f5b2b1faf5256e8b3bd1568c451f8c6b64"
+  digest = "1:38fc62caae4ecfec54e6047306fdf39210358fefce36fd9ed8e4d008fe150238"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "e8e3143a4f4a00f1fafef0dd82ba78223281b01b"
+  revision = "d89cdac9e8725f2aefce25fcbfef41134c9ad412"
 
 [[projects]]
   branch = "master"
@@ -417,7 +417,7 @@
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
   pruneopts = "UT"
-  revision = "e7d98fc518a78c9f8b5ee77be7b0b317475d89e1"
+  revision = "357c62f0e4bbba7e6cc403ae09edcf3e2b9028fe"
 
 [[projects]]
   digest = "1:4a251721b698c0e6285aec21d4ba3f79ddeccd903690144461b360ea7f948106"
@@ -440,6 +440,7 @@
     "github.com/deislabs/oras/pkg/auth/docker",
     "github.com/deislabs/oras/pkg/content",
     "github.com/deislabs/oras/pkg/oras",
+    "github.com/docker/distribution/reference",
     "github.com/google/go-containerregistry/pkg/authn",
     "github.com/google/go-containerregistry/pkg/name",
     "github.com/google/go-containerregistry/pkg/v1",
