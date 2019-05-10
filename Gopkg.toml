@@ -1,11 +1,7 @@
- [[constraint]]
-   name = "github.com/deislabs/cnab-go"
-   branch = "master"
-
-# [[constraint]]
-#   name = "github.com/deislabs/oras"
-#   source = "github.com/radu-matei/oras"
-#   branch = "push-oci-index"
+[[constraint]]
+  name = "github.com/deislabs/cnab-go"
+  source = "github.com/radu-matei/cnab-go"
+  branch = "add-duffle-types"
 
  [[constraint]]
    name = "github.com/deislabs/oras"

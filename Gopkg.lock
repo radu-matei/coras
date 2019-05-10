@@ -54,12 +54,13 @@
   revision = "004b46473808b3e7a4a3049c20e4376c91eb966d"
 
 [[projects]]
-  branch = "master"
+  branch = "add-duffle-types"
   digest = "1:8cd271f26db91626bd5993ed540069dbade9f6149134e7f8a0ed951cbbf4f2ec"
   name = "github.com/deislabs/cnab-go"
   packages = ["bundle"]
   pruneopts = "UT"
-  revision = "7cd944a8ee450ee465795d21ad7302bed34ad1b0"
+  revision = "9cd2d85086f9a1e31ac1c59e6ec4f6bb36c2f980"
+  source = "github.com/radu-matei/cnab-go"
 
 [[projects]]
   branch = "master"
@@ -440,6 +441,7 @@
     "github.com/deislabs/oras/pkg/auth/docker",
     "github.com/deislabs/oras/pkg/content",
     "github.com/deislabs/oras/pkg/oras",
+    "github.com/docker/distribution/reference",
     "github.com/google/go-containerregistry/pkg/authn",
     "github.com/google/go-containerregistry/pkg/name",
     "github.com/google/go-containerregistry/pkg/v1",
