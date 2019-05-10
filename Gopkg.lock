@@ -54,12 +54,13 @@
   revision = "004b46473808b3e7a4a3049c20e4376c91eb966d"
 
 [[projects]]
-  branch = "master"
+  branch = "add-duffle-types"
   digest = "1:8cd271f26db91626bd5993ed540069dbade9f6149134e7f8a0ed951cbbf4f2ec"
   name = "github.com/deislabs/cnab-go"
   packages = ["bundle"]
   pruneopts = "UT"
-  revision = "7cd944a8ee450ee465795d21ad7302bed34ad1b0"
+  revision = "9cd2d85086f9a1e31ac1c59e6ec4f6bb36c2f980"
+  source = "github.com/radu-matei/cnab-go"
 
 [[projects]]
   branch = "master"
@@ -211,8 +212,7 @@
   version = "v1.3.1"
 
 [[projects]]
-  branch = "master"
-  digest = "1:ff55753953bed2b3fd063aa7cd442de2a855c257d33ba0bf63f69178b5b5758e"
+  digest = "1:2e588e08805f44a6b53d08a47a48b1b7fdb6903076fc8c245f1ec769b28ceb74"
   name = "github.com/google/go-containerregistry"
   packages = [
     "pkg/authn",
@@ -224,11 +224,12 @@
     "pkg/v1/random",
     "pkg/v1/remote",
     "pkg/v1/remote/transport",
+    "pkg/v1/stream",
     "pkg/v1/types",
     "pkg/v1/v1util",
   ]
   pruneopts = "UT"
-  revision = "7d6d1d3cd63b486f713ddf83be5956744f4e1bb3"
+  revision = "5296537b6d5d12241dd0a8b1ef70a59cba62f48c"
 
 [[projects]]
   digest = "1:d5f97fc268267ec1b61c3453058c738246fc3e746f14b1ae25161513b7367b0c"
@@ -298,7 +299,6 @@
   version = "v0.1.1"
 
 [[projects]]
-  branch = "master"
   digest = "1:56529dba6b3a7f007ba2b96aa27d68eb965c980898e032fa271add2de682109b"
   name = "github.com/pivotal/image-relocation"
   packages = [
@@ -440,6 +440,7 @@
     "github.com/deislabs/oras/pkg/auth/docker",
     "github.com/deislabs/oras/pkg/content",
     "github.com/deislabs/oras/pkg/oras",
+    "github.com/docker/distribution/reference",
     "github.com/google/go-containerregistry/pkg/authn",
     "github.com/google/go-containerregistry/pkg/name",
     "github.com/google/go-containerregistry/pkg/v1",
