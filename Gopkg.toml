@@ -13,7 +13,11 @@
 
 [[constraint]]
   name = "github.com/pivotal/image-relocation"
-  branch = "master"
+  revision = "532dd0b42e7a50010d7868364309cd314a2bb376"
+
+[[override]]
+  name = "github.com/google/go-containerregistry"
+  revision = "5296537b6d5d12241dd0a8b1ef70a59cba62f48c"
 
 [[override]]
   name = "github.com/docker/docker"
